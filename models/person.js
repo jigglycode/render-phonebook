@@ -5,7 +5,7 @@ const url = process.env.MONGODB_URI
 mongoose.set('strictQuery',false)
 
 mongoose.connect(url)
-  .then(result => {
+  .then(_result => { // eslint-disable-line no-unused-vars
     console.log('connected to MongoDB')
   })
   .catch(error => {

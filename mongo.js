@@ -37,8 +37,8 @@ if (name && number) {
       result.forEach(person => {
         console.log(person)
       }
-    )
+      )
 
-    mongoose.connection.close()
-  })
+      mongoose.connection.close()
+    })
 }

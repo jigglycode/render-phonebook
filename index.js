@@ -3,8 +3,9 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const morgan = require('morgan')
-morgan.token('body', (req, res) => JSON.stringify(req.body))
 const tiny = ':method :url :status :res[content-length] - :response-time ms'
+/* eslint-disable no-unused-vars */
+morgan.token('body', (req, _res) => JSON.stringify(req.body))
 
 app.use([express.static('dist'), cors(), express.json(), morgan(`${tiny} :body`)])
 
@@ -56,7 +57,7 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response, next) => {
   Person
     .findByIdAndDelete(request.params.id)
     .then(result => response.json(result))
@@ -99,8 +100,8 @@ app.put('/api/persons/:id', (req, resp, next) => {
       { name, number },
       { new: true, runValidators: true, context: 'query' }
     )
-      .then(person => resp.json(person))
-      .catch(e => next(e))
+    .then(person => resp.json(person))
+    .catch(e => next(e))
 })
 
 app.use([unknownEndpoint, errorHandler])
@@ -109,3 +110,4 @@ const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+/* eslint-disable no-unused-vars */
