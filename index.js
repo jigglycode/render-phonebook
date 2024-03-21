@@ -26,6 +26,10 @@ const errorHandler = (error, request, response, next) => {
 
 const Person = require('./models/person')
 
+// app.get('/', (req, resp) => {
+//   resp.send('<h1>Hello World</h1>')
+// })
+
 app.get('/api/persons', (request, response) => {
   Person
     .find({})
