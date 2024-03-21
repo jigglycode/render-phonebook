@@ -1,3 +1,4 @@
+require('dotenv').config()
 const mongoose = require('mongoose')
 
 if (process.argv.length<3) {
@@ -5,10 +6,9 @@ if (process.argv.length<3) {
   process.exit(1)
 }
 
-const [password, name, number] = process.argv.slice(2)
+const [name, number] = process.argv.slice(1)
 
-const url =
-  `mongodb+srv://jigglycode:${password}@cluster0.hq2mo6y.mongodb.net/phonebookApp?retryWrites=true&w=majority`
+const url = process.env.MONGODB_URI
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
